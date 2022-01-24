@@ -1,9 +1,10 @@
 import React from "react";
+import styled from "styled-components";
 import Section from "./Section";
 
 function Home() {
   return (
-    <div>
+    <Container>
       <Section
         title="Model-3"
         description="Order Online For Touchless Delivery"
@@ -51,8 +52,13 @@ function Home() {
         leftButton="shop now"
         img="/images/accessories.jpg"
       />
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.main`
+  width: 100%;
+  height: 100vh;
+`;
 
 export default Home;

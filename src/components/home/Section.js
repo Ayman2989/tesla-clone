@@ -11,7 +11,7 @@ function Section({ title, description, leftButton, rightButton, img }) {
       <ButtonWrap>
         <ButtonField>
           <LeftButton>{leftButton}</LeftButton>
-          <RightButton>{rightButton}</RightButton>
+          {rightButton && <RightButton>{rightButton}</RightButton>}
         </ButtonField>
         <ArrowDown src="/images/down-arrow.svg" />
       </ButtonWrap>
@@ -22,7 +22,7 @@ function Section({ title, description, leftButton, rightButton, img }) {
 const Wrap = styled.div`
   width: 100%;
   height: 100vh;
-  background-image: url("/images/model-3.jpg");
+  background-image: ${(props) => `url('${props.bgImg}')`};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

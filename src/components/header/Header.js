@@ -15,7 +15,7 @@ function Header() {
       </HeaderLinks>
       <HeaderOptions>
         <a href="/">Shop</a>
-        <a href="/">Account</a>
+        <a href="/login">Account</a>
         <p href="/">Menu</p>
       </HeaderOptions>
     </Container>
@@ -70,6 +70,9 @@ const HeaderOptions = styled.div`
     margin: 15px;
     text-decoration: none;
     color: black;
+    @media (max-width: 400px) {
+      margin-right: 50px;
+    }
     &:hover {
       background-color: #615f5f13;
       border-radius: 10px;

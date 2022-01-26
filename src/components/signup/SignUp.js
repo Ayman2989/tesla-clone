@@ -1,9 +1,45 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import LanguageIcon from "@mui/icons-material/Language";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { auth } from "../../firebase";
+import { useDispatch } from "react-redux";
+import { login } from "../../features/userSlice";
 
 function SignUp() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const signUp = (e) => {
+    e.preventDefault();
+
+    if (!fName) {
+      return alert("Please enter a first name!");
+    }
+    if (!lName) {
+      return alert("Please enter a last name!");
+    }
+
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((userAuth) => {
+        userAuth.user
+          .updateProfile({
+            displayName: fName,
+          })
+          .then(() => {
+            dispatch(
+              login({
+                email: userAuth.user.email,
+                uid: userAuth.user.uid,
+                displayName: fName,
+              })
+            );
+            history.push("/teslaaccount");
+          });
+      })
+      .catch((error) => alert(error.message));
+  };
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [lName, setLName] = useState("");
@@ -54,7 +90,7 @@ function SignUp() {
           placeholder="Enter Password..."
           onChange={(e) => setPassword(e.target.value)}
         />
-        <SignInButton>sign up</SignInButton>
+        <SignInButton onClick={signUp}>sign up</SignInButton>
         <Divider>
           <hr /> <span>OR</span>
           <hr />

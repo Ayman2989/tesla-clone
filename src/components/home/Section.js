@@ -92,7 +92,8 @@ const RightButton = styled(LeftButton)`
 const ArrowDown = styled.img`
   height: 40px;
   animation: animateDown infinite 1.5s;
-  filter: brightness(0) invert(1);
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
 `;
 
 const ButtonWrap = styled.div`

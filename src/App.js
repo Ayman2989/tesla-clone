@@ -13,6 +13,7 @@ import Login from "./components/login/Login";
 import SignUp from "./components/signup/SignUp";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
+import TeslaAccount from "./components/teslaaccount/TeslaAccount";
 
 function App() {
   const user = useSelector(selectUser);
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route exact path="/signup">
             <SignUp />
+          </Route>
+          <Route path="/teslaaccount">
+            {user ? <TeslaAccount /> : <Redirect to={Login} />}
           </Route>
         </Switch>
       </div>

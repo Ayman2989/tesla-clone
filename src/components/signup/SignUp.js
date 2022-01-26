@@ -12,7 +12,9 @@ function SignUp() {
   return (
     <Container>
       <Header>
-        <img src="/images/logo.svg" alt="logo" />
+        <Link to="/">
+          <img src="/images/logo.svg" alt="logo" />
+        </Link>
         <LanguageField>
           <LanguageIcon />
           <p>en-US</p>
@@ -71,10 +73,10 @@ const Container = styled.div`
 
 const Header = styled.nav`
   display: flex;
-  padding: 10px 20px;
+  padding: 20px;
   justify-content: space-between;
   img {
-    height: 25px;
+    width: 90px;
   }
 `;
 

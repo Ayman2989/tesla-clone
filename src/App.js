@@ -1,6 +1,5 @@
 import React from "react";
 
-import { Counter } from "./features/counter/Counter";
 import "./App.css";
 import Home from "./components/home/Home";
 import Header from "./components/header/Header";
@@ -12,8 +11,12 @@ import {
 } from "react-router-dom";
 import Login from "./components/login/Login";
 import SignUp from "./components/signup/SignUp";
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
 
 function App() {
+  const user = useSelector(selectUser);
+
   return (
     <Router>
       <div className="App">
@@ -22,10 +25,10 @@ function App() {
             <Header />
             <Home />
           </Route>
-          <Route path="/login">
-            <Login />
+          <Route exact path="/login">
+            {user ? <Redirect to="/teslaaccount" /> : <Login />}
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignUp />
           </Route>
         </Switch>

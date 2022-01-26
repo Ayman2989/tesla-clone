@@ -1,11 +1,32 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import LanguageIcon from "@mui/icons-material/Language";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { auth } from "../../firebase";
+import { useDispatch } from "react-redux";
+import { login } from "../../features/userSlice";
 
 function Login() {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const signIn = (e) => {
     e.preventDefault();
+
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((userAuth) => {
+        dispatch(
+          login({
+            email: userAuth.user.email,
+            uid: userAuth.user.uid,
+            displayName: userAuth.user.displayName,
+          })
+        );
+        history.push("/teslaaccount");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
 
   const [email, setEmail] = useState("");
@@ -14,7 +35,9 @@ function Login() {
   return (
     <Container>
       <Header>
-        <img src="/images/logo.svg" alt="logo" />
+        <Link to="/">
+          <img src="/images/logo.svg" alt="logo" />
+        </Link>
         <LanguageField>
           <LanguageIcon />
           <p>en-US</p>
@@ -58,10 +81,10 @@ const Container = styled.div`
 
 const Header = styled.nav`
   display: flex;
-  padding: 10px 20px;
+  padding: 20px;
   justify-content: space-between;
   img {
-    height: 25px;
+    width: 90px;
   }
 `;
 

@@ -24,6 +24,7 @@ function SignUp() {
         <input
           type="text"
           id="fname"
+          placeholder="Enter First Name..."
           value={fName}
           onChange={(e) => setFName(e.target.value)}
         />
@@ -32,6 +33,7 @@ function SignUp() {
           type="text"
           id="lname"
           value={lName}
+          placeholder="Enter Last Name..."
           onChange={(e) => setLName(e.target.value)}
         />
         <label htmlFor="email">Email Address</label>
@@ -39,6 +41,7 @@ function SignUp() {
           type="email"
           id="email"
           value={email}
+          placeholder="Enter Email Address..."
           onChange={(e) => setEmail(e.target.value)}
         />
         <label htmlFor="password">Password</label>
@@ -46,6 +49,7 @@ function SignUp() {
           type="password"
           id="password"
           value={password}
+          placeholder="Enter Password..."
           onChange={(e) => setPassword(e.target.value)}
         />
         <SignInButton>sign up</SignInButton>

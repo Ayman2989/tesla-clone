@@ -4,7 +4,7 @@ import styled from "styled-components";
 function Header() {
   return (
     <Container>
-      <Icon src="/images/logo.svg" />
+      <Icon onClick="/" src="/images/logo.svg" />
       <HeaderLinks>
         <a href="/">Model S</a>
         <a href="/">Model 3</a>
@@ -26,7 +26,7 @@ const Container = styled.nav`
   padding: 10px;
   height: 60px;
   position: fixed;
-  top: 0;
+  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;

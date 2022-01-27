@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "./App.css";
 import Home from "./components/home/Home";
@@ -12,11 +12,31 @@ import {
 import Login from "./components/login/Login";
 import SignUp from "./components/signup/SignUp";
 import { useSelector } from "react-redux";
-import { selectUser } from "./features/userSlice";
+import { login, logout, selectUser } from "./features/userSlice";
 import TeslaAccount from "./components/teslaaccount/TeslaAccount";
+import { auth } from "./firebase";
+import { useDispatch } from "react-redux";
 
 function App() {
   const user = useSelector(selectUser);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    auth.onAuthStateChanged((userAuth) => {
+      if (userAuth) {
+        dispatch(
+          login({
+            email: userAuth.email,
+            uid: userAuth.uid,
+            displayName: userAuth.displayName,
+          })
+        );
+      } else {
+        dispatch(logout());
+      }
+    });
+  }, [dispatch]);
 
   return (
     <Router>
@@ -33,7 +53,7 @@ function App() {
             <SignUp />
           </Route>
           <Route path="/teslaaccount">
-            {user ? <TeslaAccount /> : <Redirect to={Login} />}
+            {!user ? <Login /> : <TeslaAccount />}
           </Route>
         </Switch>
       </div>

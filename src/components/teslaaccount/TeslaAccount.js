@@ -1,13 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Car from "./Car";
+import { logout, selectUser } from "../../features/userSlice";
+import { useSelector } from "react-redux";
+import { auth } from "../../firebase";
+import { useDispatch } from "react-redux";
 
 function TeslaAccount() {
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const signOut = () => {
+    auth.signOut().then(() => {
+      dispatch(logout());
+    });
+    history.push("/");
+  };
+
   return (
     <Container>
       <Header>
-        <Icon src="/images/logo.svg" />
+        <Link to="/">
+          <Icon src="/images/logo.svg" />
+        </Link>
         <HeaderLinks>
           <Link>MODEL S</Link>
           <Link>MODEL 3</Link>
@@ -17,16 +34,16 @@ function TeslaAccount() {
           <Link>SOLAR PANELS</Link>
           <Link>SHOP</Link>
           <Link>ACCOUNT</Link>
-          <Link>MENU</Link>
+          <p>MENU</p>
         </HeaderLinks>
       </Header>
       <Banner>
-        <Name>Ayman's Tesla</Name>
+        <Name>{user?.displayName + "'s"} Tesla</Name>
         <BannerLinks>
-          <Link>Home</Link>
+          <Link to="/">Home</Link>
           <Link>Account</Link>
           <Link>History</Link>
-          <Link>Sign Out</Link>
+          <Link onClick={signOut}>Sign Out</Link>
         </BannerLinks>
       </Banner>
       <Car
@@ -34,6 +51,11 @@ function TeslaAccount() {
         model="Model-S"
         leftButton="order"
         rightButton="test drive"
+      />
+      <Car
+        img="/images/ezgif-6-ab241f5907.jpg"
+        model="Model-X"
+        leftButton="order"
       />
     </Container>
   );
@@ -53,6 +75,8 @@ const Header = styled.nav`
 `;
 
 const HeaderLinks = styled.div`
+  display: flex;
+  p,
   a {
     color: #fff;
     padding: 5px;
@@ -60,6 +84,12 @@ const HeaderLinks = styled.div`
     margin: 10px;
     text-decoration: none;
     font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    a {
+      display: none;
+    }
   }
 `;
 

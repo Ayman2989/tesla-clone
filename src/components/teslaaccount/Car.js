@@ -11,7 +11,7 @@ function Car({ img, model, leftButton, rightButton }) {
 
       <Buttons>
         <LeftButton>{leftButton}</LeftButton>
-        <RightButton>{rightButton}</RightButton>
+        {rightButton && <RightButton>{rightButton}</RightButton>}
       </Buttons>
 
       <Description>
@@ -23,13 +23,10 @@ function Car({ img, model, leftButton, rightButton }) {
 }
 
 const Wrap = styled.div`
-  hr {
-    color: black;
-  }
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 40vh;
+  display: grid;
+  place-items: center;
+  border-top: 1px solid #d0d1d2;
+  padding-bottom: 5vh;
 `;
 
 const CarImg = styled.img`
@@ -39,6 +36,9 @@ const CarImg = styled.img`
 
 const Model = styled.h2`
   padding-bottom: 20px;
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 26px;
 `;
 
 const Buttons = styled.div`

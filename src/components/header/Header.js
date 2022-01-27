@@ -15,7 +15,7 @@ function Header() {
       </HeaderLinks>
       <HeaderOptions>
         <a href="/">Shop</a>
-        <a href="/login">Account</a>
+        <a href="/teslaaccount">Account</a>
         <p href="/">Menu</p>
       </HeaderOptions>
     </Container>
